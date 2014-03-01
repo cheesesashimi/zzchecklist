@@ -1,0 +1,16 @@
+This is another homework assignment. The goal of which is to implement
+a simple checklist application in 24 hours.
+
+I chose to use Google App Engine for my platform, although this should work
+with most other platforms with very little modification. The backend is written
+in Python and is essentially just an AJAX endpoint.
+
+The frontend makes use of the following JavaScript libraries hosted at
+third-party CDN (Content Distribution Networks):
+- jQuery
+- Handlebars.js
+- Moment.js
+- jQuery Tablesorter.
+- Spin.js
+
+The live application can be found at http://zzchecklist.appspot.com
