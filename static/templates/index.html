@@ -18,9 +18,9 @@
   <input id="content-input"></input>
   <button id="create-new-item" type="button">Create New Item</button>
   <ul id="filter">
-    <li id="all">All</li>
-    <li id="completed">Completed</li>
-    <li id="notcompleted">Not Completed</li>
+    <li><a href="#" id="all">All</a></li>
+    <li><a href="#" id="completed">Completed</a></li>
+    <li><a href="#" id="notcompleted">Not Completed</a></li>
   </ul>
   <table id="checklist">
     <thead>
@@ -38,6 +38,7 @@
   <script id="checklist-item" type="x-handlebars-template">
     <tr id={{key}}>
       <td>
+        <span class="hidden" id={{key}}>{{completedHelper}}</span>
         {{#if completed}}
           <input type="checkbox" id={{key}} checked="checked">
         {{else}}

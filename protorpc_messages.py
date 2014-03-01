@@ -8,7 +8,7 @@ class ChecklistKey(messages.Message):
 class ChecklistItemMessage(messages.Message):
   created_date = messages.IntegerField(1)
   content = messages.StringField(2)
-  completed = messages.BooleanField(3)
+  completed = messages.BooleanField(3, default=False)
   key = messages.StringField(4)
 
 

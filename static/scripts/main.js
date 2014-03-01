@@ -1,12 +1,14 @@
 var ChecklistView = function() {
   this.checklistItems = new ChecklistItems();
+  this.listContext = 'all';
 };
 
 ChecklistView.prototype.wireEventHandlers = function() {
   $('#create-new-item').click($.proxy(this.createItemCallback, this));
 
   $('#checklist-main').on('click', 'input', $.proxy(function(event) {
-    this.checklistItems.findByKey(event.target.id).toggle();
+    this.checklistItems.findByKey(event.target.id).toggle(); 
+    this.renderList();  
   }, this));
 
   $('#checklist-main').on('click', 'button', $.proxy(function(event) {
@@ -14,11 +16,16 @@ ChecklistView.prototype.wireEventHandlers = function() {
     this.renderList();
   }, this));
 
-  $('#filter').on('click', 'li', $.proxy(this.filterItemsCallback, this));
+  $('#filter').on('click', 'a', $.proxy(function(event) {
+    this.listContext = event.target.id;
+    this.renderList();
+  }, this));
 };
 
-ChecklistView.prototype.filterItemsCallback = function(event) {
-  switch(event.target.id) {
+ChecklistView.prototype.getItemsForContext = function(context) {
+  this.listContext = context;
+
+  switch(context) {
     case 'all':
       var items = this.checklistItems.getAllItems();
       break;
@@ -30,9 +37,10 @@ ChecklistView.prototype.filterItemsCallback = function(event) {
       break;
     default:
       var items = this.checklistItems.getAllItems();
+      this.listContext = 'all';
   }
 
-  this.renderList(items);
+  return items;
 };
 
 ChecklistView.prototype.createItemCallback = function() {
@@ -42,26 +50,39 @@ ChecklistView.prototype.createItemCallback = function() {
   this.renderList();
 };
 
-ChecklistView.prototype.renderList = function(items) {
-  if (!items) {
-    var items = this.checklistItems.getAllItems();
-  }
+ChecklistView.prototype.renderList = function() {
+  // Need to destroy the tablesorter object to prevent duplicates.
   $("#checklist").trigger('destroy');
+
+  // Remove the children so we can redraw this from scratch.
   $('#checklist-main').empty();
+
   var templateScript = $('#checklist-template').html();
   var template = Handlebars.compile(templateScript);
   Handlebars.registerPartial("checklist-item", $("#checklist-item").html());
+
+  // Pretty-print the date
   Handlebars.registerHelper('prettyDate', function() {
     return new Handlebars.SafeString(
       moment.unix(this.createdDate).format('LLLL'));
   });
+  /*
+    Handlebars does not handle boolean falses.
+    Pass a string if you want to print a string.
+  */
+  Handlebars.registerHelper('completedHelper', function() {
+    return new Handlebars.SafeString(this.completed.toString());
+  });
+  var items = this.getItemsForContext(this.listContext);
   $("#checklist-main").append(template(items));
+
   $("#checklist").tablesorter();
 };
 
 ChecklistView.prototype.handleAjaxResponse = function(json) {
   this.checklistItems.init(json);
   if (this.checklistItems) {
+    this.items = this.checklistItems.getAllItems();
     this.renderList();
   }
 };

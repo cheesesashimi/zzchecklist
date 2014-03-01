@@ -1,9 +1,9 @@
 var ChecklistItemModel = function(checklistItem) {
   if (checklistItem) {
-    this.content = checklistItem.content || null;
-    this.key = checklistItem.key || null;
-    this.createdDate = checklistItem.created_date || null;
-    this.completed = checklistItem.completed || false;
+    this.content = checklistItem.content;
+    this.key = checklistItem.key;
+    this.createdDate = checklistItem.created_date;
+    this.completed = checklistItem.completed;
   } else {
     this.content = null;
     this.key = null;
