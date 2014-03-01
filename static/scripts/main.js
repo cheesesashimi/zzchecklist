@@ -6,6 +6,18 @@ var ChecklistView = function() {
 ChecklistView.prototype.wireEventHandlers = function() {
   $('#create-new-item').click($.proxy(this.createItemCallback, this));
 
+  $('#content-input').change(function(event) {
+    if (event.target.value && event.target.value != event.target.defaultValue) {
+      $('#create-new-item').removeAttr('disabled');
+    } else {
+      $('#create-new-item').attr('disabled', 'disabled');
+    }
+  });
+
+  $('#content-input').click(function() {
+    $('#content-input')[0].value = '';
+  });
+
   $('#checklist-main').on('click', 'input', $.proxy(function(event) {
     this.checklistItems.findByKey(event.target.id).toggle(); 
     this.renderList();  
@@ -44,11 +56,14 @@ ChecklistView.prototype.getItemsForContext = function(context) {
 };
 
 ChecklistView.prototype.createItemCallback = function() {
-  var item = new ChecklistItemModel();
-  item.content = $('#content-input')[0].value;
-  $('#content-input')[0].value = '';
-  this.checklistItems.add(item.save());
-  this.renderList();
+  var input = $('#content-input')[0];
+  if (input.value && input.value != input.defaultValue) {
+    var item = new ChecklistItemModel();
+    item.content = input.value;
+    input.value = input.defaultValue;
+    this.checklistItems.add(item.save());
+    this.renderList();
+  }
 };
 
 ChecklistView.prototype.renderList = function() {
