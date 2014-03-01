@@ -91,16 +91,22 @@ ChecklistItems.prototype.add = function(checklistItemModel) {
 };
 
 ChecklistItems.prototype.deleteItem = function(key) {
-  var checklistItem = this.findByKey(key);
-  checklistItem.deleteItem();
-  this.items.splice(checklistItem.index, 1);
+  var itemIndex = 0;
+
+  jQuery.grep(this.items, function(item, index) {
+    if (item.key == key) {
+      itemIndex = index;
+      return true;
+    }
+  });
+
+  this.items[itemIndex].deleteItem();
+  this.items.splice(itemIndex, 1);
 };
 
 ChecklistItems.prototype.findByKey = function(key) {
   return jQuery.grep(this.items, function(item, index) {
-    if (item.key == key) {
-      return item;
-    }
+    return item.key == key;
   })[0];
 };
 
