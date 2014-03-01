@@ -25,9 +25,6 @@ handlers:
   static_files: static/templates/index.html
   upload: static/templates/index.html
 
-- url: .*
-  script: main.app
-
 libraries:
 - name: webapp2
   version: latest

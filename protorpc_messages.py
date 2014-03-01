@@ -1,11 +1,8 @@
 from protorpc import messages
 
-
-class ChecklistKey(messages.Message):
-  key = messages.StringField(1)
-
-
 class ChecklistItemMessage(messages.Message):
+  """ProtoRPC representation of a ChecklistItem model instance.
+  """
   created_date = messages.IntegerField(1)
   content = messages.StringField(2)
   completed = messages.BooleanField(3, default=False)
@@ -13,8 +10,13 @@ class ChecklistItemMessage(messages.Message):
 
 
 class ChecklistItemMessageUpdate(messages.Message):
+  """ProtoRPC message for encapsulating the ChecklistItemMessage.
+  """
   checklist_item = messages.MessageField(ChecklistItemMessage, 1)
 
 
 class ChecklistItems(messages.Message):
-  checklist_items = messages.MessageField(ChecklistItemMessage, 1, repeated=True)
+  """ProtoRPC message for encapsulating multiple ChecklistItemMessages.
+  """
+  checklist_items = messages.MessageField(ChecklistItemMessage, 1,
+                                          repeated=True)
