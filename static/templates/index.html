@@ -32,20 +32,24 @@
     </tbody>
   </table>
 
+  <script id="checklist-item" type="x-handlebars-template">
+    <tr id={{key}}>
+      <td>
+        {{#if completed}}
+          <input type="checkbox" id={{key}} checked="checked">
+        {{else}}
+          <input type="checkbox" id={{key}}>
+        {{/if}}
+      </td>
+      <td>{{createdDate}}</td>
+      <td>{{content}}</td>
+      <td><button type="button" id={{key}}>Delete</button></td>
+    </tr>
+  </script>
+
   <script id="checklist-template" type="x-handlebars-template">
     {{#each this}}
-      <tr id={{key}}>
-        <td>
-          {{#if completed}}
-            <input type="checkbox" id={{key}} checked="checked">
-          {{else}}
-            <input type="checkbox" id={{key}}>
-          {{/if}}
-        </td>
-        <td>{{createdDate}}</td>
-        <td>{{content}}</td>
-        <td><button type="button" id={{key}}>Delete</button></td>
-      </tr>
+      {{> checklist-item}}
     {{/each}}
   </script>
 

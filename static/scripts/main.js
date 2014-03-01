@@ -13,6 +13,26 @@ ChecklistView.prototype.wireEventHandlers = function() {
     this.checklistItems.deleteItem(event.target.id);
     this.renderList();
   }, this));
+
+  $('#filter').on('click', 'li', $.proxy(this.filterItemsCallback, this));
+};
+
+ChecklistView.prototype.filterItemsCallback = function(event) {
+  switch(event.target.id) {
+    case 'all':
+      var items = this.checklistItems.getAllItems();
+      break;
+    case 'completed':
+      var items = this.checklistItems.getCompletedItems();
+      break;
+    case 'notcompleted':
+      var items = this.checklistItems.getNotCompletedItems();
+      break;
+    default:
+      var items = this.checklistItems.getAllItems();
+  }
+
+  this.renderList(items);
 };
 
 ChecklistView.prototype.createItemCallback = function() {
@@ -22,11 +42,15 @@ ChecklistView.prototype.createItemCallback = function() {
   this.renderList();
 };
 
-ChecklistView.prototype.renderList = function() {
+ChecklistView.prototype.renderList = function(items) {
+  if (!items) {
+    var items = this.checklistItems.getAllItems();
+  }
   $('#checklist-main').empty();
   var templateScript = $('#checklist-template').html();
   var template = Handlebars.compile(templateScript);
-  $("#checklist-main").append(template(this.checklistItems.items));
+  Handlebars.registerPartial("checklist-item", $("#checklist-item").html());
+  $("#checklist-main").append(template(items));
 };
 
 ChecklistView.prototype.handleAjaxResponse = function(json) {

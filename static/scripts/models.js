@@ -104,3 +104,23 @@ ChecklistItems.prototype.findByKey = function(key) {
     }
   })[0];
 };
+
+ChecklistItems.prototype.getAllItems = function() {
+  return this.items;
+};
+
+ChecklistItems.prototype.getCompletedItems = function() {
+  return jQuery.grep(this.items, function(item, index) {
+    if (item.completed) {
+      return item;
+    }
+  });
+};
+
+ChecklistItems.prototype.getNotCompletedItems = function() {
+  return jQuery.grep(this.items, function(item, index) {
+    if (!item.completed) {
+      return item;
+    }
+  });
+};
