@@ -46,6 +46,7 @@ ChecklistView.prototype.renderList = function(items) {
   if (!items) {
     var items = this.checklistItems.getAllItems();
   }
+  $("#checklist").trigger('destroy');
   $('#checklist-main').empty();
   var templateScript = $('#checklist-template').html();
   var template = Handlebars.compile(templateScript);
@@ -55,6 +56,7 @@ ChecklistView.prototype.renderList = function(items) {
       moment.unix(this.createdDate).format('LLLL'));
   });
   $("#checklist-main").append(template(items));
+  $("#checklist").tablesorter();
 };
 
 ChecklistView.prototype.handleAjaxResponse = function(json) {

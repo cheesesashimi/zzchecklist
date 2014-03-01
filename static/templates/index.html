@@ -9,6 +9,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.0.3/moment-timezone.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.13.3/jquery.tablesorter.min.js"></script>
   <link type="text/css" rel="stylesheet" href="/static/style/main.css" />
 
   <title>My Checklist App</title>
@@ -21,13 +22,13 @@
     <li id="completed">Completed</li>
     <li id="notcompleted">Not Completed</li>
   </ul>
-  <table>
+  <table id="checklist">
     <thead>
       <tr>
-        <td>Completed?</td>
-        <td>Date Created</td>
-        <td>Task</td>
-        <td>Delete</td>
+        <th>Completed?</th>
+        <th>Date Created</th>
+        <th>Task</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody id="checklist-main">
