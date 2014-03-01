@@ -11,7 +11,7 @@ ChecklistView.prototype.wireEventHandlers = function() {
     this.renderList();  
   }, this));
 
-  $('#checklist-main').on('click', 'button', $.proxy(function(event) {
+  $('#checklist-main').on('click', 'a', $.proxy(function(event) {
     this.checklistItems.deleteItem(event.target.id);
     this.renderList();
   }, this));
@@ -46,6 +46,7 @@ ChecklistView.prototype.getItemsForContext = function(context) {
 ChecklistView.prototype.createItemCallback = function() {
   var item = new ChecklistItemModel();
   item.content = $('#content-input')[0].value;
+  $('#content-input')[0].value = '';
   this.checklistItems.add(item.save());
   this.renderList();
 };
@@ -54,7 +55,7 @@ ChecklistView.prototype.renderList = function() {
   // Need to destroy the tablesorter object to prevent duplicates.
   $("#checklist").trigger('destroy');
 
-  // Remove the children so we can redraw this from scratch.
+  // Remove any children so we can redraw this from scratch.
   $('#checklist-main').empty();
 
   var templateScript = $('#checklist-template').html();
@@ -66,10 +67,7 @@ ChecklistView.prototype.renderList = function() {
     return new Handlebars.SafeString(
       moment.unix(this.createdDate).format('LLLL'));
   });
-  /*
-    Handlebars does not handle boolean falses.
-    Pass a string if you want to print a string.
-  */
+  // Handlebars does not print boolean falses so we have to cast to string.
   Handlebars.registerHelper('completedHelper', function() {
     return new Handlebars.SafeString(this.completed.toString());
   });
