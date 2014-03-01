@@ -7,14 +7,12 @@ ChecklistView.prototype.wireEventHandlers = function() {
 
   $('#checklist-main').on('click', 'input', $.proxy(function(event) {
     this.checklistItems.findByKey(event.target.id).toggle();
-    console.dir(event);
   }, this));
 
-  /*
-  $('#checklist-main').click(function(herp) {
-    console.dir(herp);
-  });
-  */
+  $('#checklist-main').on('click', 'button', $.proxy(function(event) {
+    this.checklistItems.deleteItem(event.target.id);
+    this.renderList();
+  }, this));
 };
 
 ChecklistView.prototype.createItemCallback = function() {

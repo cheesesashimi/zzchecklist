@@ -20,6 +20,12 @@ class ChecklistService(remote.Service):
     return request
 
   @remote.method(protorpc_messages.ChecklistItemMessageUpdate,
+                 message_types.VoidMessage)
+  def DeleteItem(self, request):
+    ndb.Key(urlsafe=request.checklist_item.key).delete()
+    return message_types.VoidMessage()
+
+  @remote.method(protorpc_messages.ChecklistItemMessageUpdate,
                  protorpc_messages.ChecklistItemMessageUpdate)
   def UpdateItem(self, request):
     item = ndb.Key(urlsafe=request.checklist_item.key).get()

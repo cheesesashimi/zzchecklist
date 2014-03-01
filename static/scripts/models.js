@@ -41,7 +41,23 @@ ChecklistItemModel.prototype.save = function() {
     },
     success: $.proxy(this.onSave, this)
   });
+
   return this;
+};
+
+ChecklistItemModel.prototype.deleteItem = function() {
+  $.ajax({
+    url: 'ChecklistService.DeleteItem',
+    type: 'POST',
+    data: this.toJson(),
+    dataType: 'json',
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Content-type', 'text/json');
+    },
+    success: $.proxy(function() {
+      delete this;
+    }, this)
+  });
 };
 
 ChecklistItemModel.prototype.toggle = function() {
@@ -75,8 +91,14 @@ ChecklistItems.prototype.add = function(checklistItemModel) {
   this.items.push(checklistItemModel);
 };
 
+ChecklistItems.prototype.deleteItem = function(key) {
+  var checklistItem = this.findByKey(key);
+  checklistItem.deleteItem();
+  this.items.splice(checklistItem.index, 1);
+};
+
 ChecklistItems.prototype.findByKey = function(key) {
-  return jQuery.grep(this.items, function(item) {
+  return jQuery.grep(this.items, function(item, index) {
     if (item.key == key) {
       return item;
     }
