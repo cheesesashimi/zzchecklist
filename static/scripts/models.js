@@ -87,7 +87,6 @@ ChecklistItems.prototype.init = function(checklistItems) {
 }
 
 ChecklistItems.prototype.add = function(checklistItemModel) {
-  console.dir(checklistItemModel);
   this.items.push(checklistItemModel);
 };
 

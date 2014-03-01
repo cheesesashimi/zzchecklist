@@ -50,6 +50,10 @@ ChecklistView.prototype.renderList = function(items) {
   var templateScript = $('#checklist-template').html();
   var template = Handlebars.compile(templateScript);
   Handlebars.registerPartial("checklist-item", $("#checklist-item").html());
+  Handlebars.registerHelper('prettyDate', function() {
+    return new Handlebars.SafeString(
+      moment.unix(this.createdDate).format('LLLL'));
+  });
   $("#checklist-main").append(template(items));
 };
 
