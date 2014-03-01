@@ -45,16 +45,16 @@
   <script id="checklist-item" type="x-handlebars-template">
     <tr id={{key}}>
       <td>
-        <span class="hidden" id={{key}}>{{completedHelper}}</span>
+        <span class="hidden">{{completedHelper}}</span>
         {{#if completed}}
-          <input type="checkbox" id={{key}} checked="checked">
+          <input type="checkbox" data-key={{key}} checked="checked" />
         {{else}}
-          <input type="checkbox" id={{key}}>
+          <input type="checkbox" data-key={{key}} />
         {{/if}}
       </td>
       <td id={{createdDate}}><span class="hidden">{{createdDate}}</span>{{prettyDate}}</td>
       <td>{{content}}</td>
-      <td>[<a href="#" id={{key}}>x</a>]</td>
+      <td>[<a href="#" data-key={{key}}>x</a>]</td>
     </tr>
   </script>
 

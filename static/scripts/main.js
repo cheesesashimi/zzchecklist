@@ -11,12 +11,12 @@ ChecklistView.prototype.wireEventHandlers = function() {
   });
 
   $('#checklist-main').on('click', 'input', $.proxy(function(event) {
-    this.checklistItems.findByKey(event.target.id).toggle(); 
+    this.checklistItems.findByKey(event.target.dataset.key).toggle(); 
     this.renderList();  
   }, this));
 
   $('#checklist-main').on('click', 'a', $.proxy(function(event) {
-    this.checklistItems.deleteItem(event.target.id);
+    this.checklistItems.deleteItem(event.target.dataset.key);
     this.renderList();
   }, this));
 
