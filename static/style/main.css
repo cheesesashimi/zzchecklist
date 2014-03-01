@@ -3,12 +3,26 @@ body {
   font-size: 14px;
 }
 
+/*
+  Active filter.
+*/
 .active {
   border-bottom: 1px gray dotted;
 }
 
+/*
+  Hidden elements.
+*/
 .hidden {
   display: none;
+}
+
+/*
+  Spinner container.
+*/
+#loading {
+  float: right;
+  padding-right: 25px;
 }
 
 /*

@@ -23,6 +23,15 @@ ChecklistItemModel.prototype.toJson = function() {
   });
 };
 
+ChecklistItemModel.prototype.startSpinner = function() {
+  this.spinner = new Spinner().spin();
+  $('#loading').append(this.spinner.el);
+};
+
+ChecklistItemModel.prototype.stopSpinner = function() {
+  this.spinner.stop();
+};
+
 ChecklistItemModel.prototype.save = function() {
   if (this.key) {
     var remoteMethod = 'ChecklistService.UpdateItem';
@@ -30,7 +39,13 @@ ChecklistItemModel.prototype.save = function() {
     var remoteMethod = 'ChecklistService.CreateItem';
   }
 
+  this.startSpinner();
+
   $.ajax({
+    /*
+       We block on this AJAX call since we need to update the model
+       with server-supplied values such as the date and the key.
+    */
     async: false,
     url: remoteMethod,
     type: 'POST',
@@ -46,6 +61,7 @@ ChecklistItemModel.prototype.save = function() {
 };
 
 ChecklistItemModel.prototype.deleteItem = function() {
+  this.startSpinner();
   $.ajax({
     url: 'ChecklistService.DeleteItem',
     type: 'POST',
@@ -55,6 +71,7 @@ ChecklistItemModel.prototype.deleteItem = function() {
       xhr.setRequestHeader('Content-type', 'text/json');
     },
     success: $.proxy(function() {
+      this.stopSpinner();
       delete this;
     }, this)
   });
@@ -68,7 +85,11 @@ ChecklistItemModel.prototype.toggle = function() {
 ChecklistItemModel.prototype.onSave = function(json) {
   this.key = json.checklist_item.key;
   this.createdDate = json.checklist_item.created_date;
+  this.stopSpinner(); 
 };
+
+
+
 
 var ChecklistItems = function() {
   this.items = new Array();

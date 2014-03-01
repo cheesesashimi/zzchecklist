@@ -1,6 +1,8 @@
 var ChecklistView = function() {
   this.checklistItems = new ChecklistItems();
   this.listContext = 'all';
+  this.spinner = new Spinner().spin();
+  $('#loading').append(this.spinner.el);
 };
 
 ChecklistView.prototype.wireEventHandlers = function() {
@@ -67,14 +69,14 @@ ChecklistView.prototype.createItemCallback = function() {
 
 ChecklistView.prototype.renderList = function() {
   // Need to destroy the tablesorter object to prevent duplicates.
-  $("#checklist").trigger('destroy');
+  $('#checklist').trigger('destroy');
 
   // Remove any children so we can redraw this from scratch.
   $('#checklist-main').empty();
 
   var templateScript = $('#checklist-template').html();
   var template = Handlebars.compile(templateScript);
-  Handlebars.registerPartial("checklist-item", $("#checklist-item").html());
+  Handlebars.registerPartial('checklist-item', $('#checklist-item').html());
 
   // Pretty-print the date using moment.js
   Handlebars.registerHelper('prettyDate', function() {
@@ -86,9 +88,9 @@ ChecklistView.prototype.renderList = function() {
     return new Handlebars.SafeString(this.completed.toString());
   });
   var items = this.getItemsForContext(this.listContext);
-  $("#checklist-main").append(template(items));
+  $('#checklist-main').append(template(items));
 
-  $("#checklist").tablesorter({
+  $('#checklist').tablesorter({
     sortList: [[1,1]],
   });
 };
@@ -99,14 +101,15 @@ ChecklistView.prototype.handleAjaxResponse = function(json) {
     this.items = this.checklistItems.getAllItems();
     this.renderList();
   }
+  this.spinner.stop();
 };
 
 ChecklistView.prototype.makeInitialAjaxCall = function() {
   $.ajax({
     url: 'ChecklistService.GetAllItems',
-    type: "POST",
+    type: 'POST',
     data: '{}',
-    dataType: "json",
+    dataType: 'json',
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Content-type', 'text/json');
     },
