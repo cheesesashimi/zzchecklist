@@ -76,7 +76,7 @@ ChecklistView.prototype.renderList = function() {
   var template = Handlebars.compile(templateScript);
   Handlebars.registerPartial("checklist-item", $("#checklist-item").html());
 
-  // Pretty-print the date
+  // Pretty-print the date using moment.js
   Handlebars.registerHelper('prettyDate', function() {
     return new Handlebars.SafeString(
       moment.unix(this.createdDate).format('LLLL'));
@@ -88,7 +88,9 @@ ChecklistView.prototype.renderList = function() {
   var items = this.getItemsForContext(this.listContext);
   $("#checklist-main").append(template(items));
 
-  $("#checklist").tablesorter();
+  $("#checklist").tablesorter({
+    sortList: [[1,1]],
+  });
 };
 
 ChecklistView.prototype.handleAjaxResponse = function(json) {
