@@ -1,6 +1,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .active {
@@ -77,20 +77,67 @@ body {
 }
 
 #checklist-container th {
-  text-align: left;
-  font-size: 14px;
+  font-size: 18px;
   padding-bottom: 10px;
   border-bottom: 2px #6678b1 solid;
+  vertical-align: middle;
 }
 
 #checklist-container tbody tr:hover {
   background: rgb(213, 213, 213);
-  padding-left: 0px;
-  padding-right: 0px;
+  text-decoration: underline;
 }
 
 #checklist-container tbody td {
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px #6678b1 solid;
+  vertical-align: middle;
+}
+
+
+/* Completed checkbox header. */
+#checklist-container th:first-child {
+  width: 50px;
+  text-align: center;
+}
+
+/* Completed checkbox items. */
+#checklist-container td:first-child {
+  text-align: center;
+}
+
+/* Date Created column header. */
+#checklist-container th:first-child + th {
+  width: 230px;
+  padding-left: 20px;
+  text-align: left;
+}
+
+/* Date created items. */
+#checklist-container td:first-child + td {
+  padding-left: 20px;
+}
+
+/* Task header. */
+#checklist-container th:first-child + th + th {
+  text-align: left;
+  padding-left: 20px;
+}
+
+/* Task data. */
+#checklist-container td:first-child + td + td {
+  padding-left: 20px;
+}
+
+/* Delete header. */
+#checklist-container th:first-child + th + th + th {
+  width: 50px;
+  text-align: center;
+}
+
+/* Delete text. */
+#checklist-container td:first-child + td + td + td {
+  width: 50px;
+  text-align: center;
 }
