@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!--
+    I know there are MANY external dependencies here. In practice, I would
+    use some kind of Javascript packaging engine to minimize the number of
+    HTTP requests needed to build a page, but I am unfamiliar how many of them
+    work and was trying to avoid complexity due to my time constraint.
+  -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.0.3/moment-timezone.min.js"></script>
@@ -46,6 +52,7 @@
     </table>
   </div>
 
+  <!--This is a Handlebars.js template-->
   <script id="checklist-item" type="x-handlebars-template">
     <tr id={{key}}>
       <td>
@@ -62,6 +69,7 @@
     </tr>
   </script>
 
+  <!--This is also a Handlebars.js template-->
   <script id="checklist-template" type="x-handlebars-template">
     {{#each this}}
       {{> checklist-item}}
