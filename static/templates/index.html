@@ -9,7 +9,7 @@
   <script src="/static/scripts/main.js"></script>
   <script src="/static/scripts/models.js"></script>
   <link type="text/css" rel="stylesheet" href="/static/style/main.css" />
-
+  <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
   <title>My Checklist App</title>
 </head>
 <body>
@@ -44,7 +44,7 @@
 
   <script id="checklist-item" type="x-handlebars-template">
     <tr id={{key}}>
-      <td class="completed">
+      <td>
         <span class="hidden" id={{key}}>{{completedHelper}}</span>
         {{#if completed}}
           <input type="checkbox" id={{key}} checked="checked">
@@ -52,9 +52,9 @@
           <input type="checkbox" id={{key}}>
         {{/if}}
       </td>
-      <td class="dateCreated" id={{createdDate}}>{{prettyDate}}</td>
-      <td class="task">{{content}}</td>
-      <td class="delete">[<a href="#" id={{key}}>x</a>]</td>
+      <td id={{createdDate}}>{{prettyDate}}</td>
+      <td>{{content}}</td>
+      <td>[<a href="#" id={{key}}>x</a>]</td>
     </tr>
   </script>
 

@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   font-size: 14px;
 }
 
@@ -14,20 +14,17 @@ body {
 /*
   Item creation container stuff goes here.
 */
-#create-new-item-container {
-}
-
 #create-new-item-container input {
   border: 1px black solid;
   width: 300px;
   height: 14px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   font-size: 12px;
 }
 
 #create-new-item {
   border: 1px black solid;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Maven Pro', sans-serif;
   font-size: 12px;
 }
 
@@ -74,6 +71,10 @@ body {
 #checklist-container table {
   width: 100%;
   border-spacing: 0px;
+}
+
+#checklist-container thead {
+  cursor: pointer;
 }
 
 #checklist-container th {
