@@ -1,3 +1,83 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
 }
+
+.hidden {
+  display: none;
+}
+
+/*
+  Item creation container stuff goes here.
+*/
+#create-new-item-container {
+}
+
+#create-new-item-container input {
+  border: 1px black solid;
+  width: 300px;
+  height: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+#create-new-item {
+  border: 1px black solid;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+/*
+  Filter container stuff goes here
+*/
+#filter-container {
+  padding: 0px;
+  text-align: left;
+}
+
+#filter-container ul {
+  list-style-type: none;
+  margin-left: 0px;
+  padding: 0px;
+}
+
+#filter-container li {
+  display: inline;
+  padding-right: 10px;  
+}
+
+#filter-container a {
+  color: gray;
+  text-decoration: none;
+}
+
+#filter-container a:hover {
+  border-bottom: 1px gray dotted;
+}
+
+/*
+  Checklist container stuff goes here.
+*/
+#checklist-container a {
+  color: blue;
+  text-decoration: none;
+}
+
+#checklist-container a:hover {
+  border-bottom: 1px blue dotted;
+}
+
+#checklist-container table {
+  width: 100%;
+}
+
+#checklist-container th {
+  text-align: left;
+  font-size: 14px;
+}
+
+#checklist-container td {
+  border-bottom: 1px black solid;
+}
+
+

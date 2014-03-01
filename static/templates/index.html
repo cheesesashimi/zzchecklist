@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js"></script>
-  <script src="/static/scripts/main.js"></script>
-  <script src="/static/scripts/models.js"></script>
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.0.3/moment-timezone.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.13.3/jquery.tablesorter.min.js"></script>
+  <script src="/static/scripts/main.js"></script>
+  <script src="/static/scripts/models.js"></script>
   <link type="text/css" rel="stylesheet" href="/static/style/main.css" />
 
   <title>My Checklist App</title>
 </head>
 <body>
-  <input id="content-input"></input>
-  <button id="create-new-item" type="button">Create New Item</button>
-  <ul id="filter">
-    <li><a href="#" id="all">All</a></li>
-    <li><a href="#" id="completed">Completed</a></li>
-    <li><a href="#" id="notcompleted">Not Completed</a></li>
-  </ul>
-  <table id="checklist">
-    <thead>
-      <tr>
-        <th>Completed?</th>
-        <th>Date Created</th>
-        <th>Task</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody id="checklist-main">
-    </tbody>
-  </table>
+  <div id="create-new-item-container">
+    <input id="content-input" value="Enter Task Here"></input>
+    <button id="create-new-item" type="submit" disabled="disabled">Submit</button>
+  </div>
+
+  <div id="filter-container">
+    <ul id="filter">
+      <li>Filter:</li>
+      <li><a href="#" id="all">All</a></li>
+      <li><a href="#" id="completed">Completed Tasks</a></li>
+      <li><a href="#" id="notcompleted">Not Completed Tasks</a></li>
+    </ul>
+  </div>
+
+  <div id="checklist-container">
+    <table id="checklist">
+      <thead>
+        <tr>
+          <th>Completed?</th>
+          <th>Date Created</th>
+          <th>Task</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="checklist-main">
+      </tbody>
+    </table>
+  </div>
 
   <script id="checklist-item" type="x-handlebars-template">
     <tr id={{key}}>
-      <td>
+      <td class="completed">
         <span class="hidden" id={{key}}>{{completedHelper}}</span>
         {{#if completed}}
           <input type="checkbox" id={{key}} checked="checked">
@@ -45,9 +52,9 @@
           <input type="checkbox" id={{key}}>
         {{/if}}
       </td>
-      <td id={{createdDate}}>{{prettyDate}}</td>
-      <td>{{content}}</td>
-      <td><button type="button" id={{key}}>Delete</button></td>
+      <td class="dateCreated" id={{createdDate}}>{{prettyDate}}</td>
+      <td class="task">{{content}}</td>
+      <td class="delete">[<a href="#" id={{key}}>x</a>]</td>
     </tr>
   </script>
 
