@@ -69,15 +69,24 @@ body {
 
 #checklist-container table {
   width: 100%;
+  border-spacing: 0px;
 }
 
 #checklist-container th {
   text-align: left;
   font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px #6678b1 solid;
 }
 
-#checklist-container td {
-  border-bottom: 1px black solid;
+#checklist-container tbody tr:hover {
+  background: rgb(213, 213, 213);
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-
+#checklist-container tbody td {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-bottom: 1px #6678b1 solid;
+}
