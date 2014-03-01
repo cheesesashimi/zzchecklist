@@ -14,7 +14,16 @@
 <body>
   <input id="content-input"></input>
   <button id="create-new-item" type="button">Create New Item</button>
-  <table id="checklist-main">
+  <table>
+    <thead>
+      <tr>
+        <td>Completed?</td>
+        <td>Date Created</td>
+        <td>Task</td>
+      </tr>
+    </thead>
+    <tbody id="checklist-main">
+    </tbody>
   </table>
 
   <script id="checklist-template" type="x-handlebars-template">
