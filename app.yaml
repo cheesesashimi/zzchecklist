@@ -1,0 +1,35 @@
+application: zzchecklist
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /ChecklistService.*
+  script: services.app
+
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /static/style
+  static_dir: static/style
+
+- url: /static/scripts
+  static_dir: static/scripts
+
+- url: /static/images
+  static_dir: static/images
+
+- url: /
+  static_files: static/templates/index.html
+  upload: static/templates/index.html
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
