@@ -6,14 +6,6 @@ var ChecklistView = function() {
 ChecklistView.prototype.wireEventHandlers = function() {
   $('#create-new-item').click($.proxy(this.createItemCallback, this));
 
-  $('#content-input').change(function(event) {
-    if (event.target.value && event.target.value != event.target.defaultValue) {
-      $('#create-new-item').removeAttr('disabled');
-    } else {
-      $('#create-new-item').attr('disabled', 'disabled');
-    }
-  });
-
   $('#content-input').click(function() {
     $('#content-input')[0].value = '';
   });
@@ -34,6 +26,11 @@ ChecklistView.prototype.wireEventHandlers = function() {
   }, this));
 };
 
+ChecklistView.prototype.setActiveFilter = function() {
+  $('.active').removeClass('active');
+  $('#' + this.listContext).addClass('active');
+};
+
 ChecklistView.prototype.getItemsForContext = function(context) {
   this.listContext = context;
 
@@ -51,6 +48,8 @@ ChecklistView.prototype.getItemsForContext = function(context) {
       var items = this.checklistItems.getAllItems();
       this.listContext = 'all';
   }
+
+  this.setActiveFilter();
 
   return items;
 };
